@@ -41,7 +41,7 @@ jobs:
           echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
       - name: Copy Cloud Vision Setting from Environment
         run: |
-          echo $CLOUD_VISION_SETTING > .env
+          echo $GCLOUD_VISION_SETTING > .env
       - name: Use cloud-sdk
         uses: docker://google/cloud-sdk:273.0.0
       - name: Deploy
