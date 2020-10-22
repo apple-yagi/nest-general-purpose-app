@@ -8,7 +8,7 @@ on:
 env:
   PROJECT_ID: 'nest-general-purpose-app'
   GCLOUD_SERVICE_KEY: ${{ secrets.GCLOUD_SERVICE_KEY }}
-  GCLOUD_VISION_API_ENDPOINT: ${{ secrets.GCLOUD_VISION_SETTING }}
+  GCLOUD_VISION_SETTING: ${{ secrets.GCLOUD_VISION_SETTING }}
 
 jobs:
   deploy:
