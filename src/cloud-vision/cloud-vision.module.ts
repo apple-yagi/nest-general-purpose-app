@@ -6,7 +6,7 @@ import { CloudVisionService } from './cloud-vision.service';
 @Module({
   imports: [
     MulterModule.register({
-      dest: './cloud-vision-uploads',
+      dest: process.env.GCLOUD_VISION_DESTNATION_PATH,
     }),
   ],
   providers: [CloudVisionService],

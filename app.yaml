@@ -1,6 +1,9 @@
 runtime: nodejs12
 env: standard
 
+env_variables:
+  GCLOUD_VISION_DESTNATION_PATH: '/tmp'
+
 handlers:
   - url: /.*
     secure: always
