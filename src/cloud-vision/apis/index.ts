@@ -7,6 +7,7 @@ export const detection = async (
   annotateType: string,
 ): Promise<AnnotateResponse> => {
   const apiKey = process.env.CLOUD_VISION_API_KEY;
+  console.log(filePath)
   const visionApiUrl = `https://vision.googleapis.com/v1/images:annotate?key=${apiKey}`;
   const options: AnnotateRequest = {
     requests: [
