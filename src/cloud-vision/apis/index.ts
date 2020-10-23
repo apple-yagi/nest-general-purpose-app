@@ -31,7 +31,6 @@ export const detection = async (
     );
     return Promise.resolve(result.data);
   } catch (e) {
-    console.error(e.response || e);
     throw e;
   }
 };
