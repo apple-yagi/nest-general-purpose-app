@@ -1,18 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { AnnotateResult } from 'types/cloud-vision';
-import * as CloudVisionApis from './apis/index';
-import * as fs from 'fs';
-import { IUploadedFile } from 'types/file';
+import Client from './apis/api-client';
 
 @Injectable()
 export class CloudVisionService {
-  async detection(file: IUploadedFile, type: string): Promise<AnnotateResult[]> {
+  async detection(client: Client): Promise<any> {
     try {
-      const annotateResponse = await CloudVisionApis.detection(file.path, type);
-      fs.unlinkSync(file.path);
-      return Promise.resolve(annotateResponse.responses[0].labelAnnotations);
+      const result = await client.detection();
+      return Promise.resolve(result);
     } catch (e) {
-      throw e;
+      return e;
     }
   }
 }
