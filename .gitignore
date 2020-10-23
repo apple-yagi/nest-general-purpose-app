@@ -35,3 +35,6 @@ lerna-debug.log*
 
 # Enviroment
 .env*
+
+# GAE setting
+app.yaml
