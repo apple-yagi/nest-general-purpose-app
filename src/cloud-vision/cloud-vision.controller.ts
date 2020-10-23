@@ -18,8 +18,7 @@ export class CloudVisionController {
   faceDetection(
     @UploadedFile() file,
     @Query('type') type,
-  ) {
-    // return this.cloudVisionService.detection(file, type);
-    return { file: file, type: type }
+  ): Promise<AnnotateResult[]> {
+    return this.cloudVisionService.detection(file, type);
   }
 }
