@@ -8,7 +8,7 @@ on:
 env:
   PROJECT_ID: 'nest-general-purpose-app'
   GCLOUD_SERVICE_KEY: ${{ secrets.GCLOUD_SERVICE_KEY }}
-  CLOUD_VISION_API_KEY: ${{ secrets.CLOUD_VISION_API_KEY }}
+  GAE_APP_YAML: ${{ secrets.GAE_APP_YAML }}
 
 jobs:
   deploy:
@@ -41,7 +41,7 @@ jobs:
           echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
       - name: Copy Cloud Vision Setting from Environment
         run: |
-          echo $CLOUD_VISION_API_KEY > .env
+          echo $GAE_APP_YAML > app.yaml
       - name: Use cloud-sdk
         uses: docker://google/cloud-sdk:273.0.0
       - name: Deploy
