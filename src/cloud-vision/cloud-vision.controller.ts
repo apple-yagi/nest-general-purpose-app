@@ -1,6 +1,6 @@
 import {
   Controller,
-  Get,
+  Post,
   Query,
   UploadedFile,
   UseInterceptors,
@@ -13,7 +13,7 @@ import { AnnotateResult } from 'types/cloud-vision';
 export class CloudVisionController {
   constructor(private readonly cloudVisionService: CloudVisionService) { }
 
-  @Get('detection')
+  @Post('detection')
   @UseInterceptors(FileInterceptor('file'))
   faceDetection(
     @UploadedFile() file,

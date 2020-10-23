@@ -8,10 +8,10 @@ export class CloudVisionService {
   async detection(file, type): Promise<AnnotateResult[]> {
     try {
       const annotateResponse = await CloudVisionApis.detection(file.path, type);
-      // fs.unlinkSync(file.path);
+      fs.unlinkSync(file.path);
       return Promise.resolve(annotateResponse.responses[0].labelAnnotations);
     } catch (e) {
-      // fs.unlinkSync(file.path);
+      fs.unlinkSync(file.path);
       throw e;
     }
   }
