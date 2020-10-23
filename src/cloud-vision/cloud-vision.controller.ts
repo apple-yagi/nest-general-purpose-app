@@ -1,5 +1,7 @@
 import {
   Controller,
+  HttpException,
+  HttpStatus,
   Post,
   Query,
   UploadedFile,
@@ -8,6 +10,7 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CloudVisionService } from './cloud-vision.service';
 import { AnnotateResult } from 'types/cloud-vision';
+import { IUploadedFile } from 'types/file';
 
 @Controller('cloud-vision')
 export class CloudVisionController {
@@ -16,9 +19,16 @@ export class CloudVisionController {
   @Post('detection')
   @UseInterceptors(FileInterceptor('file'))
   faceDetection(
-    @UploadedFile() file,
-    @Query('type') type,
+    @UploadedFile() file: IUploadedFile,
+    @Query('type') type: string,
   ): Promise<AnnotateResult[]> {
-    return this.cloudVisionService.detection(file, type);
+    if (file === undefined) {
+      throw new HttpException({
+        status: HttpStatus.BAD_REQUEST,
+        error: "File not exist"
+      }, HttpStatus.BAD_REQUEST)
+    } else {
+      return this.cloudVisionService.detection(file, type);
+    }
   }
 }
