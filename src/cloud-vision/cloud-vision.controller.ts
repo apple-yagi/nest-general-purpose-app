@@ -21,7 +21,7 @@ export class CloudVisionController {
   faceDetection(
     @UploadedFile() file: IUploadedFile,
     @Query('type') type: string,
-  ) {
+  ): Promise<AnnotateResult[]> {
     if (file === undefined) {
       throw new HttpException(
         {
@@ -31,8 +31,7 @@ export class CloudVisionController {
         HttpStatus.BAD_REQUEST,
       );
     } else {
-      return file;
-      // return this.cloudVisionService.detection(file, type);
+      return this.cloudVisionService.detection(file, type);
     }
   }
 }

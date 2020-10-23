@@ -2,7 +2,7 @@ runtime: nodejs12
 env: standard
 
 env_variables:
-  GCLOUD_VISION_DESTNATION_PATH: '/tmp'
+  GCLOUD_VISION_DESTINATION_PATH: '/tmp/gcloud-vision-uploads'
 
 handlers:
   - url: /.*
