@@ -9,7 +9,6 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CloudVisionService } from './cloud-vision.service';
-import { AnnotateResult } from 'types/cloud-vision';
 import { IUploadedFile } from 'types/file';
 import ApiClient from './apis/api-client';
 
