@@ -11,6 +11,7 @@ export class CloudVisionService {
       fs.unlinkSync(file.path);
       return Promise.resolve(annotateResponse.responses[0].labelAnnotations);
     } catch (e) {
+      fs.unlinkSync(file.path);
       throw e;
     }
   }

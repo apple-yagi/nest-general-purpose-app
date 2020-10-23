@@ -11,14 +11,15 @@ import { AnnotateResult } from 'types/cloud-vision';
 
 @Controller('cloud-vision')
 export class CloudVisionController {
-  constructor(private readonly cloudVisionService: CloudVisionService) {}
+  constructor(private readonly cloudVisionService: CloudVisionService) { }
 
   @Get('detection')
   @UseInterceptors(FileInterceptor('file'))
   faceDetection(
     @UploadedFile() file,
     @Query('type') type,
-  ): Promise<AnnotateResult[]> {
-    return this.cloudVisionService.detection(file, type);
+  ) {
+    // return this.cloudVisionService.detection(file, type);
+    return { file: file, type: type }
   }
 }
