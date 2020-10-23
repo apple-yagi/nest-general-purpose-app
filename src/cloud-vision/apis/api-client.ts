@@ -32,7 +32,7 @@ class Client {
     try {
       const result = await axios.post(this.visionApiUrl, this.options);
       fs.unlinkSync(this.filepath);
-      return Promise.resolve(result);
+      return Promise.resolve(result.data);
     } catch (e) {
       throw e;
     }

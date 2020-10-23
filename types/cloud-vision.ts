@@ -13,17 +13,3 @@ export interface AnnotateRequest {
     },
   ];
 }
-
-export interface AnnotateResponse {
-  responses: [
-    {
-      labelAnnotations: Array<AnnotateResult>;
-    },
-  ];
-}
-
-export interface AnnotateResult {
-  mid: string;
-  description: string;
-  score: number;
-}
