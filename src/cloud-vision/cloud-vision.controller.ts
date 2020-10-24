@@ -3,6 +3,7 @@ import {
   Get,
   HttpException,
   HttpStatus,
+  Param,
   Post,
   Query,
   UploadedFile,
@@ -20,6 +21,11 @@ export class CloudVisionController {
   @Get()
   index(): Promise<LabelAnnotateResult[]> {
     return this.cloudVisionService.findAll();
+  }
+
+  @Get(':id')
+  findById(@Param('id') id: string): Promise<LabelAnnotateResult> {
+    return this.cloudVisionService.findById(id);
   }
 
   @Post('detection')

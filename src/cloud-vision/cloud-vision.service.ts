@@ -17,6 +17,14 @@ export class CloudVisionService {
     return this.labelDetectionModel.find().exec();
   }
 
+  async findById(id: string): Promise<LabelAnnotateResult> {
+    try {
+      return this.labelDetectionModel.findById(id).exec();
+    } catch (e) {
+      return e;
+    }
+  }
+
   async save(result: LabelAnnotateResponse) {
     result.responses.map(annotateResults => {
       annotateResults.labelAnnotations.map(annotateResult => {
