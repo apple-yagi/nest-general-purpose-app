@@ -1,11 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import Client from './apis/api-client';
+import detection from './api/detection';
+import * as fs from 'fs';
 
 @Injectable()
 export class CloudVisionService {
-  async detection(client: Client): Promise<any> {
+  async detection(filepath: string, type: string): Promise<any> {
     try {
-      const result = await client.detection();
+      const result = await detection(filepath, type);
+      fs.unlinkSync(filepath);
       return Promise.resolve(result);
     } catch (e) {
       return e;
