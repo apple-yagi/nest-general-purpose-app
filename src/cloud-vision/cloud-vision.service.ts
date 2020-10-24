@@ -4,7 +4,7 @@ import * as fs from 'fs';
 import { Model } from 'mongoose';
 import { LabelDetectionResult } from './interfaces/label-detection-result';
 import { InjectModel } from '@nestjs/mongoose';
-import { LabelAnnotateResponse } from 'types/cloud-vision';
+import { LabelAnnotateResponse, LabelAnnotateResult } from 'types/cloud-vision';
 
 @Injectable()
 export class CloudVisionService {
@@ -12,6 +12,10 @@ export class CloudVisionService {
     @InjectModel('LabelDetectionResult')
     private readonly labelDetectionModel: Model<LabelDetectionResult>,
   ) {}
+
+  async findAll(): Promise<LabelAnnotateResult[]> {
+    return this.labelDetectionModel.find().exec();
+  }
 
   async save(result: LabelAnnotateResponse) {
     result.responses.map(annotateResults => {
