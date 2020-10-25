@@ -22,14 +22,16 @@ async function bootstrap() {
   );
 
   // openapi
-  const options = new DocumentBuilder()
-    .setTitle('Purpose API')
-    .setDescription('The purpose API description')
-    .setVersion('1.0')
-    .addTag('cloud vision api')
-    .build();
-  const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('api', app, document);
+  if (process.env.NODE_ENV === 'development') {
+    const options = new DocumentBuilder()
+      .setTitle('Purpose API')
+      .setDescription('The purpose API description')
+      .setVersion('1.0')
+      .addTag('cloud vision api')
+      .build();
+    const document = SwaggerModule.createDocument(app, options);
+    SwaggerModule.setup('api', app, document);
+  }
 
   await app.listen(process.env.PORT || 3000);
   if (module.hot) {
