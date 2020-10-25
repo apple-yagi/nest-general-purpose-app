@@ -17,7 +17,6 @@ import { TasksModule } from './todos/tasks.module';
     ),
     GraphQLModule.forRoot({
       playground: true,
-      autoSchemaFile: 'schema.graphql',
     }),
     TasksModule,
   ],
