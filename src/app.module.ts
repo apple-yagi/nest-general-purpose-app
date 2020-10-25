@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { GraphQLModule } from '@nestjs/graphql';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CloudVisionModule } from './cloud-vision/cloud-vision.module';
+import { TasksModule } from './todos/tasks.module';
 
 @Module({
   imports: [
@@ -13,6 +15,11 @@ import { CloudVisionModule } from './cloud-vision/cloud-vision.module';
     MongooseModule.forRoot(
       process.env.MONGODB_URI || 'mongodb://localhost:27017/nest',
     ),
+    GraphQLModule.forRoot({
+      playground: true,
+      autoSchemaFile: 'schema.graphql',
+    }),
+    TasksModule,
   ],
   controllers: [AppController],
   providers: [AppService],

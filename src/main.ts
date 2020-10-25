@@ -13,7 +13,7 @@ async function bootstrap() {
 
   // security
   app.useGlobalPipes(new ValidationPipe());
-  app.use(helmet());
+  app.use(helmet({ contentSecurityPolicy: false }));
   app.use(
     rateLimit({
       windowMs: 10 * 60 * 1000, // 10 minutes
