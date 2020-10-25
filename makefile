@@ -10,3 +10,5 @@ ps:
 	docker ps -a
 mongo:
 	docker exec -it mongo bash
+push:
+	git push origin master
