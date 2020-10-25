@@ -38,3 +38,6 @@ lerna-debug.log*
 
 # Upload Folder
 cloud-vision-uploads
+
+# Volumes
+mongo-data/

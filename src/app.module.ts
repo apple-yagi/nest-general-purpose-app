@@ -11,7 +11,7 @@ import { CloudVisionModule } from './cloud-vision/cloud-vision.module';
     CloudVisionModule,
     ConfigModule.forRoot(),
     MongooseModule.forRoot(
-      process.env.MONGODB_URI || 'mongodb://localhost:27017/nestjs',
+      process.env.MONGODB_URI || 'mongodb://localhost:27017/nest',
     ),
   ],
   controllers: [AppController],
