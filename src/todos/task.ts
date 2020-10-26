@@ -13,4 +13,10 @@ export class Task {
 
   @Field()
   done: boolean;
+
+  @Field()
+  createdAt: string;
+
+  @Field()
+  updatedAt: string;
 }

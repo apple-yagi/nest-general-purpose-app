@@ -1,9 +1,7 @@
 import {
   Controller,
-  Get,
   HttpException,
   HttpStatus,
-  Param,
   Post,
   Query,
   UploadedFile,
@@ -12,21 +10,10 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CloudVisionService } from './cloud-vision.service';
 import { IUploadedFile } from 'types/file';
-import { LabelAnnotateResult } from 'types/cloud-vision';
 
 @Controller('cloud-vision')
 export class CloudVisionController {
-  constructor(private readonly cloudVisionService: CloudVisionService) {}
-
-  @Get()
-  index(): Promise<LabelAnnotateResult[]> {
-    return this.cloudVisionService.findAll();
-  }
-
-  @Get(':id')
-  findById(@Param('id') id: string): Promise<LabelAnnotateResult> {
-    return this.cloudVisionService.findById(id);
-  }
+  constructor(private readonly cloudVisionService: CloudVisionService) { }
 
   @Post('detection')
   @UseInterceptors(FileInterceptor('file'))

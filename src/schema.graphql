@@ -2,14 +2,28 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type LabelDetectionResult {
+  id: ID!
+  mid: String!
+  description: String!
+  score: Float!
+  topicality: Float!
+  createdAt: String!
+  updatedAt: String!
+}
+
 type Task {
   id: ID!
   title: String!
   description: String!
   done: Boolean!
+  createdAt: String!
+  updatedAt: String!
 }
 
 type Query {
+  labelDetectionResults: [LabelDetectionResult!]!
+  labelDetectionResult(id: String!): LabelDetectionResult!
   tasks: [Task!]!
 }
 

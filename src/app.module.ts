@@ -6,6 +6,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CloudVisionModule } from './cloud-vision/cloud-vision.module';
 import { TasksModule } from './todos/tasks.module';
+import { LabelDetectionResultsModule } from './label-detection-results/label-detection-results.module';
 
 @Module({
   imports: [
@@ -18,10 +19,12 @@ import { TasksModule } from './todos/tasks.module';
     GraphQLModule.forRoot({
       playground: true,
       typePaths: ['./src/schema.graphql'],
+      autoSchemaFile: process.env.NODE_ENV === 'development' ? './src/schema.graphql' : false
     }),
     TasksModule,
+    LabelDetectionResultsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
