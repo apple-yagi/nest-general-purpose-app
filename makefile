@@ -12,3 +12,5 @@ mongo:
 	docker-compose up -d mongo
 push:
 	git push origin master
+pull:
+	git pull origin master
