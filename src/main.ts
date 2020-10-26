@@ -16,7 +16,7 @@ async function bootstrap() {
   app.use(helmet({ contentSecurityPolicy: false }));
   app.use(
     rateLimit({
-      windowMs: 10 * 60 * 1000, // 10 minutes
+      windowMs: 10 * 60 * 100, // 1 minutes
       max: 100, // limit each IP to 100 requests per windowMs
     }),
   );
