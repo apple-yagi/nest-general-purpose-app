@@ -9,6 +9,6 @@ start:
 ps:
 	docker ps -a
 mongo:
-	docker exec -it mongo bash
+	docker-compose up -d mongo
 push:
 	git push origin master
