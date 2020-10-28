@@ -5,7 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CloudVisionModule } from './cloud-vision/cloud-vision.module';
-import { TasksModule } from './todos/tasks.module';
+import { TasksModule } from './tasks/tasks.module';
 import { LabelDetectionResultsModule } from './label-detection-results/label-detection-results.module';
 
 @Module({
@@ -19,7 +19,8 @@ import { LabelDetectionResultsModule } from './label-detection-results/label-det
     GraphQLModule.forRoot({
       playground: true,
       typePaths: ['./src/schema.graphql'],
-      autoSchemaFile: process.env.NODE_ENV === 'development' ? './src/schema.graphql' : false
+      autoSchemaFile:
+        process.env.NODE_ENV === 'development' ? './src/schema.graphql' : false,
     }),
     TasksModule,
     LabelDetectionResultsModule,
@@ -27,4 +28,4 @@ import { LabelDetectionResultsModule } from './label-detection-results/label-det
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}
