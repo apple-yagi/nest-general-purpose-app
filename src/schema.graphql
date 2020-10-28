@@ -25,8 +25,11 @@ type Query {
   labelDetectionResults: [LabelDetectionResult!]!
   labelDetectionResult(id: String!): LabelDetectionResult!
   tasks: [Task!]!
+  task(id: String!): Task!
 }
 
 type Mutation {
   createTask(description: String!, title: String!): Task!
+  updateTask(description: String!, title: String!, id: String!): Task!
+  deleteTask(id: String!): Task!
 }
