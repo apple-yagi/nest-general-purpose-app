@@ -7,6 +7,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import * as expressLayouts from 'express-ejs-layouts'
+import * as sassMiddleware from 'node-sass-middleware'
 declare const module: any;
 
 async function bootstrap() {
@@ -15,10 +16,20 @@ async function bootstrap() {
   });
 
   // view
-  app.useStaticAssets(join(__dirname, '..', 'public'));
-  app.setBaseViewsDir(join(__dirname, '..', 'views'));
+  app.useStaticAssets(join(__dirname, '..', 'templates/public'));
+  app.setBaseViewsDir(join(__dirname, '..', 'templates/views/ejs'));
   app.setViewEngine('ejs');
   app.use(expressLayouts)
+
+
+  // sass
+  if (process.env.NODE_ENV === 'development') {
+    app.use(sassMiddleware({
+      src: join(__dirname, '..', 'templates/views/scss'),
+      dest: join(__dirname, '..', 'templates/public'),
+      debug: false
+    }))
+  }
 
   // security
   app.useGlobalPipes(new ValidationPipe());
