@@ -1,9 +1,11 @@
 import {
   Controller,
+  Get,
   HttpException,
   HttpStatus,
   Post,
   Query,
+  Render,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
@@ -14,6 +16,12 @@ import { IUploadedFile } from 'types/file';
 @Controller('cloud-vision')
 export class CloudVisionController {
   constructor(private readonly cloudVisionService: CloudVisionService) { }
+
+  @Get()
+  @Render('cloud-vision/index')
+  root() {
+    return
+  }
 
   @Post('detection')
   @UseInterceptors(FileInterceptor('file'))
