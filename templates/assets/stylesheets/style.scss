@@ -24,14 +24,25 @@ footer {
   min-height: 800px;
 }
 
-.logo-content {
-  text-align: center;
+.content {
+  padding: 0 30px 0;
 
-  h5 {
-    a, a:link, a:visited, a:active, a:hover {
-      color: #b9b6b3;
-      text-decoration: none;
+  .content-logo {
+    text-align: center;
+
+    h5 {
+      a, a:link, a:visited, a:active {
+        color: #b9b6b3;
+        text-decoration: none;
+      }
+      a:hover {
+        color: #202020;
+      }
     }
+  }
+  .content-text {
+    text-align: center;
+    color: #202020;
   }
 }
 

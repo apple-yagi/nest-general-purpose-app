@@ -1,0 +1,16 @@
+section {
+  text-align: center; }
+  section h2 {
+    color: #a9a6a3; }
+  section h5 {
+    color: #202020; }
+
+td a,
+td a:link,
+td a:visited,
+td a:active {
+  color: #999693;
+  text-decoration: none; }
+
+td a:hover {
+  color: #202020; }

@@ -16,17 +16,20 @@ import { HeadData } from 'types/render';
 
 @Controller('cloud-vision')
 export class CloudVisionController {
-  constructor(private readonly cloudVisionService: CloudVisionService) { }
+  constructor(private readonly cloudVisionService: CloudVisionService) {}
 
   @Get()
   @Render('cloud-vision/index')
   root(): HeadData {
     const headData: HeadData = {
       title: 'Cloud Vision',
-      stylesheets: ['<link rel="stylesheet" href="stylesheets/animation.css">'],
-      activePage: 'cloud-vision'
-    }
-    return headData
+      stylesheets: [
+        '<link rel="stylesheet" href="stylesheets/animation.css">',
+        '<link rel="stylesheet" href="stylesheets/cloud-vision.css">',
+      ],
+      activePage: 'cloud-vision',
+    };
+    return headData;
   }
 
   @Post('detection')

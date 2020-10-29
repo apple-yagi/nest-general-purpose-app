@@ -19,15 +19,17 @@ async function bootstrap() {
   app.useStaticAssets(join(__dirname, '..', 'templates/public'));
   app.setBaseViewsDir(join(__dirname, '..', 'templates/views/pages'));
   app.setViewEngine('ejs');
-  app.use(expressLayouts)
+  app.use(expressLayouts);
 
   // sass
   if (process.env.NODE_ENV === 'development') {
-    app.use(sassMiddleware({
-      src: join(__dirname, '..', 'templates/assets'),
-      dest: join(__dirname, '..', 'templates/public'),
-      debug: false,
-    }))
+    app.use(
+      sassMiddleware({
+        src: join(__dirname, '..', 'templates/assets'),
+        dest: join(__dirname, '..', 'templates/public'),
+        debug: true,
+      }),
+    );
   }
 
   // security
