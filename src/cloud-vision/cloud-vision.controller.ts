@@ -23,7 +23,7 @@ export class CloudVisionController {
   root(): HeadData {
     const headData: HeadData = {
       title: 'Cloud Vision',
-      stylesheets: []
+      stylesheets: ['<link rel="stylesheet" href="stylesheets/animation.css">']
     }
     return headData
   }
