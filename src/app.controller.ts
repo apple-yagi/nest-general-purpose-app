@@ -10,7 +10,9 @@ export class AppController {
   @Render('index')
   root() {
     const headData: HeadData = {
-      title: "Purpose Top", stylesheets: ['<link rel="stylesheet" href="stylesheets/animation.css">']
+      title: "Purpose Top",
+      stylesheets: ['<link rel="stylesheet" href="stylesheets/animation.css">'],
+      activePage: 'home'
     }
     return headData
   }
