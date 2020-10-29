@@ -1,4 +1,5 @@
 import { Controller, Get, Render } from '@nestjs/common';
+import { HeadData } from 'types/render';
 import { AppService } from './app.service';
 
 @Controller()
@@ -8,6 +9,9 @@ export class AppController {
   @Get()
   @Render('index')
   root() {
-    return { message: 'Hello World' }
+    const headData: HeadData = {
+      title: "Purpose Top", stylesheets: ['<link rel="stylesheet" href="stylesheets/animation.css">']
+    }
+    return headData
   }
 }

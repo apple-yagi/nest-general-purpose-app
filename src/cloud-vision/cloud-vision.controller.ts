@@ -12,6 +12,7 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CloudVisionService } from './cloud-vision.service';
 import { IUploadedFile } from 'types/file';
+import { HeadData } from 'types/render';
 
 @Controller('cloud-vision')
 export class CloudVisionController {
@@ -19,8 +20,12 @@ export class CloudVisionController {
 
   @Get()
   @Render('cloud-vision/index')
-  root() {
-    return
+  root(): HeadData {
+    const headData: HeadData = {
+      title: 'Cloud Vision',
+      stylesheets: []
+    }
+    return headData
   }
 
   @Post('detection')

@@ -17,17 +17,16 @@ async function bootstrap() {
 
   // view
   app.useStaticAssets(join(__dirname, '..', 'templates/public'));
-  app.setBaseViewsDir(join(__dirname, '..', 'templates/views/ejs'));
+  app.setBaseViewsDir(join(__dirname, '..', 'templates/views/pages'));
   app.setViewEngine('ejs');
   app.use(expressLayouts)
-
 
   // sass
   if (process.env.NODE_ENV === 'development') {
     app.use(sassMiddleware({
-      src: join(__dirname, '..', 'templates/views/scss'),
+      src: join(__dirname, '..', 'templates/assets'),
       dest: join(__dirname, '..', 'templates/public'),
-      debug: false
+      debug: false,
     }))
   }
 
@@ -54,6 +53,8 @@ async function bootstrap() {
   }
 
   await app.listen(process.env.PORT || 3000);
+
+  // hot reload
   if (module.hot) {
     module.hot.accept();
     module.hot.dispose(() => app.close());
