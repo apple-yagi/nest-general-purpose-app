@@ -21,7 +21,7 @@ export class AppController {
         src: "https://cdn.svgporn.com/logos/swagger.svg",
         alt: "swagger logo"
       },
-      href: "https://swagger.io/",
+      href: "/api",
       description: "SwaggerはRESTful APIを構築するためのオープンソースのフレームワークです。REST APIの設計、構築、文書化、および使用に役立つ機能を提供します。"
     }
 
@@ -31,7 +31,7 @@ export class AppController {
         src: "/images/cloud-vision-api-512-color.svg",
         alt: "cloud vision api"
       },
-      href: "https://cloud.google.com/vision?hl=ja",
+      href: "/cloud-vision",
       description: "Google Cloud の Vision API は REST API や RPC API を介して強力な事前トレーニング済み機械学習モデルを提供します。画像にラベルを割り当てることで、事前定義済みの数百万のカテゴリに画像を高速に分類できます。"
     }
 
@@ -41,7 +41,7 @@ export class AppController {
         src: "https://cdn.svgporn.com/logos/graphql.svg",
         alt: "GraphQL logo"
       },
-      href: "https://graphql.org/",
+      href: "/graphql",
       description: "GraphQL は、アプリケーション・プログラミング・インタフェース (API) 向けのクエリ言語とサーバーサイドランタイムの両方を指します。クライアントがリクエストしたデータだけを提供することを優先します。"
     }
 
