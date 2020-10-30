@@ -18,29 +18,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td><a href="https://cloud.google.com/vision/docs/labels?hl=ja" target="_blank">LABEL_DETECTION</a></td>
-            <td>事前定義されたラベルを使用した画像の分類</td>
-          </tr>
-          <tr>
-            <td><a href="https://cloud.google.com/vision/docs/ocr?hl=ja" target="_blank">TEXT_DETECTION</a></td>
-            <td>画像からテキストを検出、抽出します。</td>
-          </tr>
-          <tr>
-            <td><a href="https://cloud.google.com/vision/docs/detecting-landmarks?hl=ja"
-                target="_blank">LANDMARK_DETECTION</a></td>
-            <td>よく知られている自然のランドマークや人工建造物を画像から検出します。</td>
-          </tr>
-          <tr>
-            <td><a href="https://cloud.google.com/vision/docs/detecting-faces?hl=ja" target="_blank">FACE_DETECTION</a>
-            </td>
-            <td>画像に含まれる複数の人物の顔を検出します。さらに感情や wearing headwear など、関連する主な顔属性についても識別します。</td>
-          </tr>
-          <tr>
-            <td><a href="https://cloud.google.com/vision/docs/detecting-logos?hl=ja" target="_blank">LOGO_DETECTION</a>
-            </td>
-            <td>よく知られている商品のロゴを画像から検出します。</td>
-          </tr>
+          <% visions.forEach(vision => { %>
+          <%- include('../../components/_vision-td.ejs', { vision: vision}); %>
+          <% }) %>
         </tbody>
       </table>
     </div>

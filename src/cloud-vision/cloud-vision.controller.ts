@@ -13,6 +13,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { CloudVisionService } from './cloud-vision.service';
 import { IUploadedFile } from 'types/file';
 import { HeadData } from 'types/render';
+import visions from './render-data/visions'
 
 @Controller('cloud-vision')
 export class CloudVisionController {
@@ -29,7 +30,8 @@ export class CloudVisionController {
       ],
       activePage: 'cloud-vision',
     };
-    return { headData: headData };
+
+    return { headData: headData, visions: visions };
   }
 
   @Post('detection')

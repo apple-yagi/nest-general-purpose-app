@@ -13,3 +13,9 @@ export interface ContentData {
   href: string,
   description: string
 }
+
+export interface VisionTableData {
+  href: string,
+  type: string,
+  description: string
+}
