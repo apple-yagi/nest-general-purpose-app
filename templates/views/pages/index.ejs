@@ -8,8 +8,8 @@
 <section class="container">
   <h2 class="text-center mb-5">Use Technologies</h2>
   <div class="row row-cols-1 row-cols-md-3">
-    <%- include('../components/sections/_openapi.ejs'); %>
-    <%- include('../components/sections/_graphql.ejs'); %>
-    <%- include('../components/sections/_cloud-vision.ejs'); %>
+    <% contentList.forEach(content => { %>
+    <%- include('../components/_content.ejs', { content: content}); %>
+    <% }) %>
   </div>
 </section>
