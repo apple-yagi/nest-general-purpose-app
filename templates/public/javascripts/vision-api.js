@@ -13,6 +13,7 @@ window.addEventListener('load', () => {
     const file = document.getElementById("vision-form-file-input")
     if (!file.files[0]) {
       alert('ファイルを選択してください')
+      return
     }
 
     const body = new FormData()
@@ -25,6 +26,11 @@ window.addEventListener('load', () => {
     xhr.onload = () => {
       const responseObj = xhr.response;
       const table = document.getElementById('vision-result-table-body')
+
+      while (table.lastChild) {
+        table.removeChild(table.lastChild)
+      }
+
       responseObj.responses.forEach(response => {
         response.labelAnnotations.forEach((result, i) => {
           const tr = document.createElement("tr");
