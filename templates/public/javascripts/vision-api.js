@@ -16,10 +16,12 @@ window.addEventListener('load', () => {
       return
     }
 
+    const type = document.getElementById("type-select").value
+
     const body = new FormData()
     body.append('file', file.files[0])
     const xhr = new XMLHttpRequest()
-    xhr.open('post', 'cloud-vision/detection?type=LABEL_DETECTION')
+    xhr.open('post', `cloud-vision/detection?type=${type}`)
     xhr.responseType = 'json'
     xhr.send(body)
 
@@ -32,7 +34,12 @@ window.addEventListener('load', () => {
       }
 
       responseObj.responses.forEach(response => {
-        response.labelAnnotations.forEach((result, i) => {
+        if (!Object.keys(response).length) {
+          alert('該当する結果がありませんでした')
+          return
+        }
+
+        response[Object.keys(response)[0]].forEach((result, i) => {
           const tr = document.createElement("tr");
 
           const th = document.createElement("th");

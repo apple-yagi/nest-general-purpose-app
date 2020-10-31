@@ -1,6 +1,13 @@
 <div><img id="preview" height="200px"></div>
 
 <div class="mt-5">
+  <select name="type" id="type-select">
+    <option value="LABEL_DETECTION">LABEL_DETECTION</option>
+    <option value="TEXT_DETECTION">TEXT_DETECTION</option>
+    <option value="LANDMARK_DETECTION">LANDMARK_DETECTION</option>
+    <option value="FACE_DETECTION">FACE_DETECTION</option>
+    <option value="LOGO_DETECTION">LOGO_DETECTION</option>
+  </select>
   <input type="file" id="vision-form-file-input" accept="image/*" name="vision-file-input">
   <button id="vision-form-submit">解析</button>
 </div>
