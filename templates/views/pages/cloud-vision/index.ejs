@@ -1,13 +1,24 @@
 <div class="main">
   <div class="d-lg-flex align-items-center top-logo fade-in text-center">
-    <img src="/images/cloud-vision-api-512-color.svg" width="200" alt="cloud vision icon">
+    <img
+      src="/images/cloud-vision-api-512-color.svg"
+      width="200"
+      alt="cloud vision icon"
+    />
     <h1 class="pl-lg-2">Lets try Cloud Vision API</h1>
   </div>
 </div>
 
 <section>
+  <%- include('../../components/_vision-form.ejs') %>
+  <%- include('../../components/_vision-table.ejs') %>
+</section>
+
+<section class="mt-5">
   <h2>How to use?</h2>
-  <h4>URLクエリパラメータにタイプを指定することで様々な画像認識を行うことができます</h4>
+  <h4>
+    URLクエリパラメータにタイプを指定することで様々な画像認識を行うことができます
+  </h4>
   <table class="table table-sm table-dark">
     <div class="table-responsive">
       <table class="table align-middle">
@@ -18,9 +29,9 @@
           </tr>
         </thead>
         <tbody>
-          <% visions.forEach(vision => { %>
-          <%- include('../../components/_vision-td.ejs', { vision: vision}); %>
-          <% }) %>
+          <% visions.forEach(vision => { %> <%-
+          include('../../components/_vision-td.ejs', { vision: vision}); %> <%
+          }) %>
         </tbody>
       </table>
     </div>

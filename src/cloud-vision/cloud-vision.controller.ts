@@ -13,11 +13,11 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { CloudVisionService } from './cloud-vision.service';
 import { IUploadedFile } from 'types/file';
 import { HeadData } from 'types/render';
-import visions from './render-data/visions'
+import visions from './render-data/visions';
 
 @Controller('cloud-vision')
 export class CloudVisionController {
-  constructor(private readonly cloudVisionService: CloudVisionService) { }
+  constructor(private readonly cloudVisionService: CloudVisionService) {}
 
   @Get()
   @Render('cloud-vision/index')
@@ -27,6 +27,7 @@ export class CloudVisionController {
       stylesheets: [
         '<link rel="stylesheet" href="stylesheets/animation.css">',
         '<link rel="stylesheet" href="stylesheets/cloud-vision.css">',
+        '<script type="text/javascript" src="javascripts/vision-api.js"></script>',
       ],
       activePage: 'cloud-vision',
     };
