@@ -18,3 +18,16 @@ td a:hover {
 .vision-json {
   background-color: #364549;
   color: #e3e3e3; }
+
+.vision-file-form label > input {
+  display: none; }
+
+.vision-file-form label {
+  padding: 0 1rem;
+  border: solid 1px #888; }
+
+.vision-file-form label::after {
+  content: "+";
+  font-size: 1rem;
+  color: #888;
+  padding-left: 1rem; }
