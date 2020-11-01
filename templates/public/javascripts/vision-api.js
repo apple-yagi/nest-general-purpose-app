@@ -33,31 +33,37 @@ window.addEventListener('load', () => {
         table.removeChild(table.lastChild)
       }
 
-      responseObj.responses.forEach(response => {
-        if (!Object.keys(response).length) {
-          alert('該当する結果がありませんでした')
-          return
-        }
+      if (type === 'LABEL_DETECTION' || type === 'LANDMARK_DETECTION' || type === 'LOGO_DETECTION') {
+        responseObj.responses.forEach(response => {
+          if (!Object.keys(response).length) {
+            alert('該当する結果がありませんでした')
+            return
+          }
 
-        response[Object.keys(response)[0]].forEach((result, i) => {
-          const tr = document.createElement("tr");
+          response[Object.keys(response)[0]].forEach((result, i) => {
+            const tr = document.createElement("tr");
 
-          const th = document.createElement("th");
-          th.scope = "row"
-          th.innerHTML = i + 1
-          tr.appendChild(th)
+            const th = document.createElement("th");
+            th.scope = "row"
+            th.innerHTML = i + 1
+            tr.appendChild(th)
 
-          const description = document.createElement("td")
-          description.innerHTML = result.description
-          tr.appendChild(description)
+            const description = document.createElement("td")
+            description.innerHTML = result.description
+            tr.appendChild(description)
 
-          const score = document.createElement("td")
-          score.innerHTML = `${Math.floor(result.score * 10000) / 100}%`
-          tr.appendChild(score)
+            const score = document.createElement("td")
+            score.innerHTML = `${Math.floor(result.score * 10000) / 100}%`
+            tr.appendChild(score)
 
-          table.appendChild(tr)
+            table.appendChild(tr)
+          })
         })
-      })
+      } 
+
+      const divJson = document.getElementById('vision-json')
+      divJson.textContent = ''
+      divJson.insertAdjacentText('afterbegin',JSON.stringify(responseObj, null, 2))
     }
   })
 })
