@@ -10,6 +10,8 @@ ps:
 	docker ps -a
 mongo:
 	docker-compose up -d mongo
+mys:
+	docker-compose up -d mysql
 push:
 	git push origin master
 pull:

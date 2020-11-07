@@ -41,3 +41,4 @@ cloud-vision-uploads
 
 # Volumes
 mongo-data/
+mysql/db/

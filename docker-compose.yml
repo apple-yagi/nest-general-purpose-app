@@ -13,6 +13,7 @@ services:
       - mongo
     links:
       - mongo
+      - mysql
     command: yarn dev
   
   mongo:
@@ -23,3 +24,15 @@ services:
     volumes:
       - ./mongo-data:/data/db
     command: mongod
+
+  mysql:
+    build: ./mysql
+    container_name: mysql
+    volumes:
+      - ./mysql/db:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
