@@ -9,8 +9,10 @@ services:
       - ./:/app
     environment:
       - MONGODB_URI=mongodb://mongo/nest
+      - MYSQL_HOST=mysql
     depends_on:
       - mongo
+      - mysql
     links:
       - mongo
       - mysql
