@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { hashSync } from 'bcrypt';
 import { Repository } from 'typeorm';
 import { CreateUserDto, SignupDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
@@ -12,7 +11,7 @@ export class UsersService {
   ) {}
 
   findAll(): Promise<User[]> {
-    return this.usersRepository.find();
+    return this.usersRepository.find({ relations: ['items'] });
   }
 
   findById(id: string): Promise<User> {
@@ -30,5 +29,9 @@ export class UsersService {
 
   async remove(id: string): Promise<void> {
     await this.usersRepository.delete(id);
+  }
+
+  async update(updateUser: Partial<User>) {
+    return await this.usersRepository.update(updateUser.id, updateUser);
   }
 }

@@ -8,9 +8,13 @@ import { CloudVisionModule } from './cloud-vision/cloud-vision.module';
 import { TasksModule } from './tasks/tasks.module';
 import { LabelDetectionResultsModule } from './label-detection-results/label-detection-results.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './users/entities/user.entity';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { join } from 'path';
+import { ItemsController } from './items/items.controller';
+import { ItemsModule } from './items/items.module';
+import { User } from './users/entities/user.entity';
+import { Item } from './items/entities/item.entity';
 
 @Module({
   imports: [
@@ -24,7 +28,7 @@ import { AuthModule } from './auth/auth.module';
       username: process.env.MYSQL_USER || 'root',
       password: process.env.MYSQL_PASSWORD || 'root',
       database: process.env.MYSQL_DB || 'mydb',
-      entities: [User],
+      entities: [User, Item],
       synchronize: true,
       logging: process.env.NODE_ENV === 'development' ? true : false,
       extra:
@@ -47,8 +51,9 @@ import { AuthModule } from './auth/auth.module';
     LabelDetectionResultsModule,
     UsersModule,
     AuthModule,
+    ItemsModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, ItemsController],
   providers: [AppService],
 })
 export class AppModule {}
