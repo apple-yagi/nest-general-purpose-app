@@ -29,7 +29,7 @@ services:
     build: ./mysql
     container_name: mysql
     volumes:
-      - ./mysql/db:/var/lib/mysql
+      - ./mysql/db:/var/lib/mysql:Z
     ports:
       - 3306:3306
     environment:

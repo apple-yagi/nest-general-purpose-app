@@ -10,6 +10,7 @@ import { LabelDetectionResultsModule } from './label-detection-results/label-det
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/entities/user.entity';
 import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -24,11 +25,14 @@ import { UsersModule } from './users/users.module';
       password: process.env.MYSQL_PASSWORD || 'root',
       database: process.env.MYSQL_DB || 'mydb',
       entities: [User],
-      synchronize: false,
+      synchronize: true,
       logging: process.env.NODE_ENV === 'development' ? true : false,
-      extra: {
-        socketPath: process.env.MYSQL_HOST,
-      },
+      extra:
+        process.env.NODE_ENV === 'development'
+          ? {}
+          : {
+              socketPath: process.env.MYSQL_HOST,
+            },
     }),
     MongooseModule.forRoot(
       process.env.MONGODB_URI || 'mongodb://localhost:27017/nest',
@@ -42,6 +46,7 @@ import { UsersModule } from './users/users.module';
     TasksModule,
     LabelDetectionResultsModule,
     UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
