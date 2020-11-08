@@ -14,6 +14,7 @@ env:
   MYSQL_USER: ${{ secrets.MYSQL_USER }}
   MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
   MYSQL_DB: ${{ secrets.MYSQL_DB }}
+  JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
 
 jobs:
   deploy:
@@ -52,6 +53,7 @@ jobs:
           echo $MYSQL_USER >> .env
           echo $MYSQL_PASSWORD >> .env
           echo $MYSQL_DB >> .env
+          echo $JWT_SECRET_KEY >> .env
       - name: Use cloud-sdk
         uses: docker://google/cloud-sdk:273.0.0
       - name: Deploy
