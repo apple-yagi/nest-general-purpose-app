@@ -23,7 +23,6 @@ export class ItemsService {
       const findedUser = await this.usersService.findOne(user.name);
       createdItem.userId = findedUser.id;
       const insertedItem = await this.itemsRepository.save(createdItem);
-      findedUser.items.push(insertedItem);
       return insertedItem;
     } catch (e) {
       throw e;
