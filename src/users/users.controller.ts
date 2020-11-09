@@ -4,13 +4,15 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Request,
   UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
-import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateResult } from 'typeorm';
+import { CreateUserDto, UpdateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 import { UsersService } from './users.service';
 
@@ -27,7 +29,7 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @Get('profile')
   getProfile(@Request() req) {
-    return req.user;
+    return this.usersService.hasItems(req.user.name);
   }
 
   @UseGuards(JwtAuthGuard)
@@ -39,6 +41,14 @@ export class UsersController {
   @Post()
   create(@Body(ValidationPipe) user: CreateUserDto): Promise<User> {
     return this.usersService.create(user);
+  }
+
+  @Patch(':id')
+  update(
+    @Param('id') id: string,
+    @Body(ValidationPipe) user: UpdateUserDto,
+  ): Promise<UpdateResult> {
+    return this.usersService.update(id, user as Partial<User>);
   }
 
   @UseGuards(JwtAuthGuard)

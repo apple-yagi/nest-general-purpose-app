@@ -22,3 +22,7 @@ export class SignupDto {
     this.password = hashSync(createUser.password, 15);
   }
 }
+
+export class UpdateUserDto extends CreateUserDto {
+  readonly id: number;
+}

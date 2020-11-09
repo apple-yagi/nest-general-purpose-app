@@ -7,3 +7,7 @@ export class CreateItemDto {
   @IsString()
   readonly description: string;
 }
+
+export class UpdateItemDto extends CreateItemDto {
+  readonly id: number;
+}

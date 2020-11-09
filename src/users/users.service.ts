@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { CreateUserDto, SignupDto } from './dto/create-user.dto';
+import { Repository, UpdateResult } from 'typeorm';
+import { CreateUserDto, SignupDto, UpdateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 
 @Injectable()
@@ -14,24 +14,69 @@ export class UsersService {
     return this.usersRepository.find({ relations: ['items'] });
   }
 
-  findById(id: string): Promise<User> {
-    return this.usersRepository.findOne(id);
+  async findById(id: string): Promise<User> {
+    const findedUser = await this.usersRepository.findOne(id);
+    if (!findedUser) this.notFound();
+    return findedUser;
   }
 
-  findOne(name: string): Promise<User> {
-    return this.usersRepository.findOne({ name: name });
+  async findOne(name: string): Promise<User> {
+    const findedUser = await this.usersRepository.findOne({ name: name });
+    if (!findedUser) this.notFound();
+    return findedUser;
+  }
+
+  async hasItems(name: string): Promise<User> {
+    const findedUser = await this.usersRepository.findOne(
+      { name },
+      { relations: ['items'] },
+    );
+    if (!findedUser) this.notFound;
+    return findedUser;
   }
 
   async create(createUser: CreateUserDto): Promise<User> {
     const signupUser: SignupDto = new SignupDto(createUser);
-    return this.usersRepository.save(signupUser);
+    try {
+      return this.usersRepository.save(signupUser);
+    } catch (e) {
+      this.internalServer(e.message);
+    }
   }
 
   async remove(id: string): Promise<void> {
-    await this.usersRepository.delete(id);
+    try {
+      await this.usersRepository.delete(id);
+    } catch (e) {
+      this.internalServer(e.message);
+    }
   }
 
-  async update(updateUser: Partial<User>) {
-    return await this.usersRepository.update(updateUser.id, updateUser);
+  async update(id: string, updateUser: Partial<User>): Promise<UpdateResult> {
+    try {
+      return await this.usersRepository.update(id, updateUser);
+    } catch (e) {
+      this.internalServer(e.message);
+    }
+  }
+
+  private notFound(): HttpException {
+    throw new HttpException(
+      {
+        status: HttpStatus.NOT_FOUND,
+        error: 'User not found',
+      },
+      404,
+    );
+  }
+
+  private internalServer(err_msg): HttpException {
+    throw new HttpException(
+      {
+        status: HttpStatus.INTERNAL_SERVER_ERROR,
+        error: err_msg,
+      },
+      500,
+    );
   }
 }
