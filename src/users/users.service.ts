@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, UpdateResult } from 'typeorm';
-import { CreateUserDto, SignupDto, UpdateUserDto } from './dto/create-user.dto';
+import { CreateUserDto, SignupDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 
 @Injectable()
@@ -52,9 +52,10 @@ export class UsersService {
     }
   }
 
-  async update(id: string, updateUser: Partial<User>): Promise<UpdateResult> {
+  async update(id: string, updateUser: Partial<User>): Promise<User> {
     try {
-      return await this.usersRepository.update(id, updateUser);
+      const updateResult = await this.usersRepository.update(id, updateUser);
+      return updateUser as User;
     } catch (e) {
       this.internalServer(e.message);
     }

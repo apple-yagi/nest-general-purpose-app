@@ -10,7 +10,7 @@ import {
   UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 import { UpdateResult } from 'typeorm';
 import { CreateItemDto, UpdateItemDto } from './dto/create-item.dto';
 import { Item } from './entities/item.entity';
@@ -49,7 +49,7 @@ export class ItemsController {
   update(
     @Param('id') id: string,
     @Body(ValidationPipe) item: UpdateItemDto,
-  ): Promise<UpdateResult> {
+  ): Promise<Item> {
     return this.itemsService.update(id, item as Partial<Item>);
   }
 }

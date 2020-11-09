@@ -23,6 +23,15 @@ export class ItemsService {
     return findedItem;
   }
 
+  async findOne(title: string): Promise<Item> {
+    const findedItem = await this.itemsRepository.findOne(
+      { title },
+      { relations: ['user'] },
+    );
+    if (!findedItem) this.notFound();
+    return findedItem;
+  }
+
   async insert(item: CreateItemDto, user: User) {
     try {
       // Itemを作成
@@ -48,9 +57,10 @@ export class ItemsService {
     }
   }
 
-  async update(id: string, item: Partial<Item>) {
+  async update(id: string, item: Partial<Item>): Promise<Item> {
     try {
-      return await this.itemsRepository.update(id, item);
+      await this.itemsRepository.update(id, item);
+      return item as Item;
     } catch (e) {
       this.internalServer(e.message);
     }

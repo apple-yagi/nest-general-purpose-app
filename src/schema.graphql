@@ -21,15 +21,48 @@ type Task {
   updatedAt: String!
 }
 
+type Item {
+  id: ID!
+  title: String!
+  description: String!
+  done: Boolean!
+  createdAt: DateTime!
+  updateAt: DateTime!
+  user: User!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type User {
+  id: ID!
+  name: String!
+  items: [Item!]!
+}
+
 type Query {
   labelDetectionResults: [LabelDetectionResult!]!
   labelDetectionResult(id: String!): LabelDetectionResult!
   tasks: [Task!]!
   task(id: String!): Task!
+  whoAmI: User!
+  users: [User!]!
+  userById(id: String!): User!
+  userOne(name: String!): User!
+  items: [Item!]!
+  itemById(id: String!): Item!
+  itemOne(title: String!): Item!
 }
 
 type Mutation {
   createTask(description: String!, title: String!): Task!
   updateTask(description: String!, title: String!, id: String!): Task!
   deleteTask(id: String!): Task!
+  createUser(password: String!, name: String!): User!
+  updateUser(name: String!, id: String!): User!
+  createItem(description: String!, title: String!): Item!
+  deleteItem(id: String!): Item!
+  updateItem(description: String!, title: String!, id: String!): Item!
 }

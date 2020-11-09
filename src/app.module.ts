@@ -10,7 +10,6 @@ import { LabelDetectionResultsModule } from './label-detection-results/label-det
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
-import { join } from 'path';
 import { ItemsController } from './items/items.controller';
 import { ItemsModule } from './items/items.module';
 import { User } from './users/entities/user.entity';
@@ -43,6 +42,7 @@ import { Item } from './items/entities/item.entity';
     ),
     GraphQLModule.forRoot({
       playground: true,
+      context: ({ req }) => ({ req }),
       typePaths: ['./src/schema.graphql'],
       autoSchemaFile:
         process.env.NODE_ENV === 'development' ? './src/schema.graphql' : false,

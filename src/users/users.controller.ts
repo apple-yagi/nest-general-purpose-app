@@ -10,8 +10,7 @@ import {
   UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
-import { UpdateResult } from 'typeorm';
+import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 import { CreateUserDto, UpdateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 import { UsersService } from './users.service';
@@ -47,7 +46,7 @@ export class UsersController {
   update(
     @Param('id') id: string,
     @Body(ValidationPipe) user: UpdateUserDto,
-  ): Promise<UpdateResult> {
+  ): Promise<User> {
     return this.usersService.update(id, user as Partial<User>);
   }
 
