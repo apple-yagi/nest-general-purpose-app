@@ -14,6 +14,7 @@ import { ItemsController } from './items/items.controller';
 import { ItemsModule } from './items/items.module';
 import { User } from './users/entities/user.entity';
 import { Item } from './items/entities/item.entity';
+import { EventsGateway } from './events.gateway';
 
 @Module({
   imports: [
@@ -54,6 +55,6 @@ import { Item } from './items/entities/item.entity';
     ItemsModule,
   ],
   controllers: [AppController, ItemsController],
-  providers: [AppService],
+  providers: [AppService, EventsGateway],
 })
 export class AppModule {}
