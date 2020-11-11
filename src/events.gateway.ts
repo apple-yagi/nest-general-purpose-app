@@ -7,7 +7,7 @@ import {
 } from '@nestjs/websockets';
 import { Server } from 'socket.io';
 
-@WebSocketGateway()
+@WebSocketGateway(80, { namespace: "events", transports: ['websocket', 'polling'] })
 export class EventsGateway {
   @WebSocketServer()
   server: Server;

@@ -5,6 +5,7 @@ import * as rateLimit from 'express-rate-limit';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import { WsAdapter } from '@nestjs/platform-ws'
 import { join } from 'path';
 import * as expressLayouts from 'express-ejs-layouts';
 import * as sassMiddleware from 'node-sass-middleware';
@@ -52,7 +53,11 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(process.env.PORT || 3000);
+
+  // WebSocket
+  app.useWebSocketAdapter(new WsAdapter(app))
+
+  await app.listen(process.env.PORT || 8080);
 
   // hot reload
   if (module.hot) {

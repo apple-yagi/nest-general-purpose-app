@@ -1337,6 +1337,14 @@
     socket.io "2.3.0"
     tslib "2.0.3"
 
+"@nestjs/platform-ws@^7.5.1":
+  version "7.5.1"
+  resolved "https://registry.yarnpkg.com/@nestjs/platform-ws/-/platform-ws-7.5.1.tgz#17037e1c89802bb611020fb9b113dd5a3cec998d"
+  integrity sha512-ky86iLgin0AkgTIzT/ywtXYYePU2VY7CkaEqZm+sfHhVNK0f557I7t+QKnp/Vj4DSsAxM2XrgLsKkNxRVB+/DA==
+  dependencies:
+    tslib "2.0.3"
+    ws "7.3.1"
+
 "@nestjs/schematics@^7.0.0", "@nestjs/schematics@^7.1.0":
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/@nestjs/schematics/-/schematics-7.1.2.tgz#678058436f578fc1e933da9db327a223b1ab8a73"
@@ -11436,6 +11444,11 @@ write@1.0.3:
   dependencies:
     mkdirp "^0.5.1"
 
+ws@7.3.1, ws@^7.2.3:
+  version "7.3.1"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-7.3.1.tgz#d0547bf67f7ce4f12a72dfe31262c68d7dc551c8"
+  integrity sha512-D3RuNkynyHmEJIpD2qrgVkc9DQ23OrN/moAwZX4L8DfvszsJxpjQuUq3LMx6HoYji9fbIOBY18XWBsAux1ZZUA==
+
 ws@^5.2.0:
   version "5.2.2"
   resolved "https://registry.yarnpkg.com/ws/-/ws-5.2.2.tgz#dffef14866b8e8dc9133582514d1befaf96e980f"
@@ -11454,11 +11467,6 @@ ws@^7.1.2:
   version "7.4.0"
   resolved "https://registry.yarnpkg.com/ws/-/ws-7.4.0.tgz#a5dd76a24197940d4a8bb9e0e152bb4503764da7"
   integrity sha512-kyFwXuV/5ymf+IXhS6f0+eAFvydbaBW3zjpT6hUdAh/hbVjTIB5EHBGi0bPoCLSK2wcuz3BrEkB9LrYv1Nm4NQ==
-
-ws@^7.2.3:
-  version "7.3.1"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-7.3.1.tgz#d0547bf67f7ce4f12a72dfe31262c68d7dc551c8"
-  integrity sha512-D3RuNkynyHmEJIpD2qrgVkc9DQ23OrN/moAwZX4L8DfvszsJxpjQuUq3LMx6HoYji9fbIOBY18XWBsAux1ZZUA==
 
 ws@~6.1.0:
   version "6.1.4"

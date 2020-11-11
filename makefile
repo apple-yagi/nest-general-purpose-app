@@ -16,3 +16,5 @@ push:
 	git push origin master
 pull:
 	git pull origin master
+all-up:
+	make mongo && make mys && yarn dev
