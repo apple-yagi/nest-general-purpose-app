@@ -9,7 +9,11 @@ import {
 } from '@nestjs/websockets';
 import { Server } from 'socket.io';
 
-@WebSocketGateway(8081, { path: '/chat', transports: ['websocket'] })
+@WebSocketGateway(8081, {
+  path: '/chat',
+  transports: ['websocket'],
+  allowUpgrades: false,
+})
 export class EventsGateway implements OnGatewayConnection, OnGatewayDisconnect {
   @WebSocketServer()
   server: Server;
