@@ -1,19 +1,31 @@
 import {
-  MessageBody,
   SubscribeMessage,
   WebSocketGateway,
   WebSocketServer,
   WsResponse,
+  MessageBody,
+  OnGatewayConnection,
+  OnGatewayDisconnect,
 } from '@nestjs/websockets';
 import { Server } from 'socket.io';
 
-@WebSocketGateway(8081, {
-  namespace: '/chat',
-  transports: ['websocket', 'polling'],
-})
-export class EventsGateway {
+@WebSocketGateway(8081, { path: '/chat', transports: ['websocket'] })
+export class EventsGateway implements OnGatewayConnection, OnGatewayDisconnect {
   @WebSocketServer()
   server: Server;
+  wss = [];
+
+  async handleConnection(ws: WebSocket) {
+    // A client has connected
+    this.wss.push(ws);
+  }
+
+  async handleDisconnect(ws: WebSocket) {
+    // A client has disconnected
+    this.wss.filter(w => {
+      return ws !== w;
+    });
+  }
 
   @SubscribeMessage('message')
   handleMessage(@MessageBody() data: any): WsResponse<string> {
@@ -21,8 +33,14 @@ export class EventsGateway {
   }
 
   @SubscribeMessage('broadcast')
-  broadcast(@MessageBody() data: any): void {
-    console.log(data);
-    this.server.emit('broadcast', { event: 'message', data: data });
+  broadcast(socket: WebSocket, data: any): void {
+    this.wss.forEach(ws => {
+      ws.send(
+        JSON.stringify({
+          event: 'message',
+          data: data,
+        }),
+      );
+    });
   }
 }

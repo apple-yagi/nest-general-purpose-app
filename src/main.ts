@@ -10,6 +10,7 @@ import { join } from 'path';
 import * as expressLayouts from 'express-ejs-layouts';
 import * as sassMiddleware from 'node-sass-middleware';
 import { IoAdapter } from '@nestjs/platform-socket.io';
+import { RedisIoAdapter } from './adapters/redis.adapter';
 declare const module: any;
 
 async function bootstrap() {
@@ -35,8 +36,8 @@ async function bootstrap() {
   }
 
   // security
-  app.useGlobalPipes(new ValidationPipe());
-  app.use(helmet({ contentSecurityPolicy: false }));
+  // app.useGlobalPipes(new ValidationPipe());
+  // app.use(helmet({ contentSecurityPolicy: false }));
   // app.use(
   //   rateLimit({
   //     windowMs: 10 * 60 * 100, // 1 minutes
@@ -55,9 +56,9 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   // WebSocket
-  app.useWebSocketAdapter(new WsAdapter(8081));
+  app.useWebSocketAdapter(new WsAdapter(app));
   // app.useWebSocketAdapter(new IoAdapter(app));
-  // app.useWebSocketAdapter(new RedisIoAdapter(app));
+  // app.useWebSocketAdapter(new RedisIoAdapter(8081));
 
   await app.listen(process.env.PORT || 8080);
 
