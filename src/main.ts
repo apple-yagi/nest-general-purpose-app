@@ -5,10 +5,11 @@ import * as rateLimit from 'express-rate-limit';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import { WsAdapter } from '@nestjs/platform-ws'
+import { WsAdapter } from '@nestjs/platform-ws';
 import { join } from 'path';
 import * as expressLayouts from 'express-ejs-layouts';
 import * as sassMiddleware from 'node-sass-middleware';
+import { IoAdapter } from '@nestjs/platform-socket.io';
 declare const module: any;
 
 async function bootstrap() {
@@ -36,12 +37,12 @@ async function bootstrap() {
   // security
   app.useGlobalPipes(new ValidationPipe());
   app.use(helmet({ contentSecurityPolicy: false }));
-  app.use(
-    rateLimit({
-      windowMs: 10 * 60 * 100, // 1 minutes
-      max: 100, // limit each IP to 100 requests per windowMs
-    }),
-  );
+  // app.use(
+  //   rateLimit({
+  //     windowMs: 10 * 60 * 100, // 1 minutes
+  //     max: 100, // limit each IP to 100 requests per windowMs
+  //   }),
+  // );
 
   // openapi
   const options = new DocumentBuilder()
@@ -53,9 +54,10 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
 
-
   // WebSocket
-  app.useWebSocketAdapter(new WsAdapter(app))
+  app.useWebSocketAdapter(new WsAdapter(8081));
+  // app.useWebSocketAdapter(new IoAdapter(app));
+  // app.useWebSocketAdapter(new RedisIoAdapter(app));
 
   await app.listen(process.env.PORT || 8080);
 

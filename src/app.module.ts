@@ -14,7 +14,7 @@ import { ItemsController } from './items/items.controller';
 import { ItemsModule } from './items/items.module';
 import { User } from './users/entities/user.entity';
 import { Item } from './items/entities/item.entity';
-import { EventsGateway } from './events.gateway';
+import { EventsModule } from './events/events.module';
 
 @Module({
   imports: [
@@ -53,8 +53,9 @@ import { EventsGateway } from './events.gateway';
     UsersModule,
     AuthModule,
     ItemsModule,
+    EventsModule,
   ],
   controllers: [AppController, ItemsController],
-  providers: [AppService, EventsGateway],
+  providers: [AppService],
 })
 export class AppModule {}

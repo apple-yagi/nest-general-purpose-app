@@ -7,7 +7,10 @@ import {
 } from '@nestjs/websockets';
 import { Server } from 'socket.io';
 
-@WebSocketGateway(80, { namespace: "events", transports: ['websocket', 'polling'] })
+@WebSocketGateway(8081, {
+  namespace: '/chat',
+  transports: ['websocket', 'polling'],
+})
 export class EventsGateway {
   @WebSocketServer()
   server: Server;
@@ -19,6 +22,7 @@ export class EventsGateway {
 
   @SubscribeMessage('broadcast')
   broadcast(@MessageBody() data: any): void {
-    this.server.emit('broadcast', { event: 'response', data: data });
+    console.log(data);
+    this.server.emit('broadcast', { event: 'message', data: data });
   }
 }

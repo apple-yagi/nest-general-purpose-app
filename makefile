@@ -12,6 +12,8 @@ mongo:
 	docker-compose up -d mongo
 mys:
 	docker-compose up -d mysql
+redis:
+	docker-compose up -d redis
 push:
 	git push origin master
 pull:
