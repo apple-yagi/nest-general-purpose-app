@@ -15,7 +15,7 @@ export class EventsGateway implements OnGatewayConnection, OnGatewayDisconnect {
   server: Server;
   wss = [];
 
-  async handleConnection(ws: WebSocket) {
+  async handleConnection(ws) {
     // A client has connected
     this.wss.push(ws);
   }
@@ -33,7 +33,7 @@ export class EventsGateway implements OnGatewayConnection, OnGatewayDisconnect {
   }
 
   @SubscribeMessage('broadcast')
-  broadcast(socket: WebSocket, data: any): void {
+  broadcast(socket, data: any): void {
     this.wss.forEach(ws => {
       ws.send(
         JSON.stringify({
