@@ -9,8 +9,6 @@ import { WsAdapter } from '@nestjs/platform-ws';
 import { join } from 'path';
 import * as expressLayouts from 'express-ejs-layouts';
 import * as sassMiddleware from 'node-sass-middleware';
-import { IoAdapter } from '@nestjs/platform-socket.io';
-import { RedisIoAdapter } from './adapters/redis.adapter';
 declare const module: any;
 
 async function bootstrap() {
@@ -36,14 +34,14 @@ async function bootstrap() {
   }
 
   // security
-  // app.useGlobalPipes(new ValidationPipe());
-  // app.use(helmet({ contentSecurityPolicy: false }));
-  // app.use(
-  //   rateLimit({
-  //     windowMs: 10 * 60 * 100, // 1 minutes
-  //     max: 100, // limit each IP to 100 requests per windowMs
-  //   }),
-  // );
+  app.useGlobalPipes(new ValidationPipe());
+  app.use(helmet({ contentSecurityPolicy: false }));
+  app.use(
+    rateLimit({
+      windowMs: 10 * 60 * 100, // 1 minutes
+      max: 100, // limit each IP to 100 requests per windowMs
+    }),
+  );
 
   // openapi
   const options = new DocumentBuilder()
@@ -57,8 +55,6 @@ async function bootstrap() {
 
   // WebSocket
   app.useWebSocketAdapter(new WsAdapter(app));
-  // app.useWebSocketAdapter(new IoAdapter(app));
-  // app.useWebSocketAdapter(new RedisIoAdapter(8081));
 
   await app.listen(process.env.PORT || 8080);
 
