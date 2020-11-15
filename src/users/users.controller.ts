@@ -26,7 +26,7 @@ export class UsersController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('profile')
+  @Get('items')
   getProfile(@Request() req) {
     return this.usersService.hasItems(req.user.name);
   }

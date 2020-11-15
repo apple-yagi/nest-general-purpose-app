@@ -1,13 +1,18 @@
 import {
   Body,
   Controller,
+  Get,
+  HttpException,
+  HttpStatus,
   Post,
+  Request,
   UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginUserDto } from './dto/login-user.dto';
 import { LocalAuthGuard } from 'src/guards/local-auth.guard';
+import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -17,5 +22,20 @@ export class AuthController {
   @Post('login')
   async login(@Body(ValidationPipe) loginUser: LoginUserDto) {
     return this.authService.login(loginUser);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('identifier')
+  async identifier(@Request() req) {
+    if (!req.user) {
+      throw new HttpException(
+        {
+          status: HttpStatus.UNAUTHORIZED,
+          error: 'Authentication required',
+        },
+        401,
+      );
+    }
+    return req.user;
   }
 }
