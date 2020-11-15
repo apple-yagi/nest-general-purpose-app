@@ -27,15 +27,6 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   @Get('identifier')
   async identifier(@Request() req) {
-    if (!req.user) {
-      throw new HttpException(
-        {
-          status: HttpStatus.UNAUTHORIZED,
-          error: 'Authentication required',
-        },
-        401,
-      );
-    }
     return req.user;
   }
 }
