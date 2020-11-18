@@ -14,7 +14,7 @@ import { ItemsController } from './items/items.controller';
 import { ItemsModule } from './items/items.module';
 import { User } from './users/entities/user.entity';
 import { Item } from './items/entities/item.entity';
-import { EventsModule } from './events/events.module';
+// import { EventsModule } from './events/events.module';
 
 @Module({
   imports: [
@@ -53,7 +53,7 @@ import { EventsModule } from './events/events.module';
     UsersModule,
     AuthModule,
     ItemsModule,
-    EventsModule,
+    // EventsModule,
   ],
   controllers: [AppController, ItemsController],
   providers: [AppService],
