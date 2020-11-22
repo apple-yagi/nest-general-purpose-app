@@ -14,30 +14,32 @@ import { ItemsController } from './items/items.controller';
 import { ItemsModule } from './items/items.module';
 import { User } from './users/entities/user.entity';
 import { Item } from './items/entities/item.entity';
-// import { EventsModule } from './events/events.module';
+import { EventsModule } from './events/events.module';
 
 @Module({
   imports: [
     CloudVisionModule,
     CloudVisionModule,
     ConfigModule.forRoot(),
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: process.env.MYSQL_HOST || 'localhost',
-      port: 3306,
-      username: process.env.MYSQL_USER || 'root',
-      password: process.env.MYSQL_PASSWORD || 'root',
-      database: process.env.MYSQL_DB || 'mydb',
-      entities: [User, Item],
-      synchronize: true,
-      logging: process.env.NODE_ENV === 'development' ? true : false,
-      extra:
-        process.env.NODE_ENV === 'development'
-          ? {}
-          : {
-              socketPath: process.env.MYSQL_HOST,
-            },
-    }),
+    process.env.NODE_ENV === 'development'
+      ? TypeOrmModule.forRoot({
+          type: 'mysql',
+          host: process.env.MYSQL_HOST || 'localhost',
+          port: 3306,
+          username: process.env.MYSQL_USER || 'root',
+          password: process.env.MYSQL_PASSWORD || 'root',
+          database: process.env.MYSQL_DB || 'mydb',
+          entities: [User, Item],
+          synchronize: true,
+          logging: process.env.NODE_ENV === 'development' ? true : false,
+          extra:
+            process.env.NODE_ENV === 'development'
+              ? {}
+              : {
+                  socketPath: process.env.MYSQL_HOST,
+                },
+        })
+      : null,
     MongooseModule.forRoot(
       process.env.MONGODB_URI || 'mongodb://localhost:27017/nest',
     ),
@@ -50,10 +52,10 @@ import { Item } from './items/entities/item.entity';
     }),
     TasksModule,
     LabelDetectionResultsModule,
-    UsersModule,
-    AuthModule,
-    ItemsModule,
-    // EventsModule,
+    process.env.NODE_ENV === 'development' ? UsersModule : null,
+    process.env.NODE_ENV === 'development' ? AuthModule : null,
+    process.env.NODE_ENV === 'development' ? ItemsModule : null,
+    process.env.NODE_ENV === 'development' ? EventsModule : null,
   ],
   controllers: [AppController, ItemsController],
   providers: [AppService],
