@@ -55,7 +55,7 @@ import { EventsModule } from './events/events.module';
     // ItemsModule,
     // EventsModule,
   ],
-  controllers: [AppController, ItemsController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
